@@ -41,8 +41,8 @@ public class DBConfig {
 		LocalSessionFactoryBuilder lsf= new LocalSessionFactoryBuilder(getDataSource()); 
 		Properties hibernateProperties = new Properties();
 
-		hibernateProperties.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQL81Dialect");
-		//hibernateProperties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect");
+		//hibernateProperties.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQL81Dialect");
+		hibernateProperties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect");
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
 		hibernateProperties.setProperty("hibernate.show_sql", "false");
 		hibernateProperties.setProperty("hibernate.format_sql", "true");
@@ -79,31 +79,41 @@ public class DBConfig {
 //		return dataSource; 
 //	}
 	
+//	@Bean 
+//	public DataSource getDataSource() throws URISyntaxException { 
+//
+//	//	URI dbUri = new URI("postgres://zmclzpqmfckfgh:bd320530841f56f0a058727098269511e5c4bbe1ccc11819e38076a137a4a0bb@ec2-52-86-25-51.compute-1.amazonaws.com:5432/d9atvrga2nbf1o");
+//
+//		//String username = dbUri.getUserInfo().split(":")[0];
+//		//String password = dbUri.getUserInfo().split(":")[1];
+//		String dbUrl = "jdbc:postgresql://45.138.25.157:5432/cable_db?sslmode=require";
+//
+//		BasicDataSource dataSource = new BasicDataSource(); dataSource.setDriverClassName("org.postgresql.Driver");
+//		dataSource.setUrl(dbUrl);
+//		dataSource.setUsername("postgres");
+//		dataSource.setPassword("gowthaman"); 
+//		return dataSource; 
+//	}
+
 	@Bean 
 	public DataSource getDataSource() throws URISyntaxException { 
-
-	//	URI dbUri = new URI("postgres://zmclzpqmfckfgh:bd320530841f56f0a058727098269511e5c4bbe1ccc11819e38076a137a4a0bb@ec2-52-86-25-51.compute-1.amazonaws.com:5432/d9atvrga2nbf1o");
-
-		//String username = dbUri.getUserInfo().split(":")[0];
-		//String password = dbUri.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://45.138.25.157:5432/cable_db?sslmode=require";
-
-		BasicDataSource dataSource = new BasicDataSource(); dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl(dbUrl);
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("gowthaman"); 
-		return dataSource; 
-	}
-
-	/*@Bean 
-	public DataSource getDataSource() { 
+		
+		URI dbUri = new URI("mysql://root:0ph2AE8PvQXELqIImVkg@containers-us-west-62.railway.app:6858/railway");
+		
+				String username = dbUri.getUserInfo().split(":")[0];
+				String password = dbUri.getUserInfo().split(":")[1];
+				String dbUrl = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
 		BasicDataSource dataSource = new BasicDataSource(); 
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/cable_db");
-		dataSource.setUsername("root"); 
-		dataSource.setPassword(""); 
+		//dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/cable_db");
+		//dataSource.setUsername("root"); 
+		//dataSource.setPassword(""); 
+		
+		dataSource.setUrl(dbUrl);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 		return dataSource; 
-	}*/
+	}
 
 	@Bean 
 	public HibernateTransactionManager hibTransManager() throws URISyntaxException {
